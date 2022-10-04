@@ -4,7 +4,9 @@ import com.example.bugcheck.pojo.table.Data;
 import com.example.bugcheck.pojo.table.DataExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface DataMapper {
     int countByExample(DataExample example);
 

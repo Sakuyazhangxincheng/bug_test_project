@@ -4,7 +4,9 @@ import com.example.bugcheck.pojo.table.User;
 import com.example.bugcheck.pojo.table.UserExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface UserMapper {
     int countByExample(UserExample example);
 
