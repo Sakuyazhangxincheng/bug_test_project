@@ -21,7 +21,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @GetMapping("/")
+    @GetMapping("/index")
     @ResponseBody
     public ReturnObject<User> register(User user, @RequestParam("code")String codeValue){
         return new ReturnObject<>(SUCCESS, user);

@@ -23,5 +23,4 @@ public class ReturnObject<T> {
         this.object = object;
         this.code = code;
     }
-
 }
