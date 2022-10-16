@@ -3,13 +3,16 @@ package com.example.bugcheck.service.impl;
 import com.example.bugcheck.mapper.UserMapper;
 import com.example.bugcheck.pojo.table.User;
 import com.example.bugcheck.pojo.table.UserExample;
+import com.example.bugcheck.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+import static com.example.bugcheck.utils.Global.SUCCESS;
+
 @Service
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserMapper userMapper;
@@ -24,7 +27,7 @@ public class UserServiceImpl implements UserService{
         {
             return null;
         }
-
+        user.setId(listUser().size()+1);
         // 否则注册为新的用户
         userMapper.insert(user);
 
@@ -46,4 +49,32 @@ public class UserServiceImpl implements UserService{
         }
         else return null;
     }
+
+    @Override
+    public List<User> listUser() {
+        return userMapper.selectByExample(null);
+    }
+
+    @Override
+    public int changeEmail(String username, String email) {
+        UserExample userExample=new UserExample();
+        userExample.createCriteria().andNameEqualTo(username);
+        List<User> users =userMapper.selectByExample(userExample);
+        User user=users.get(0);
+        user.setEmail(email);
+        userMapper.updateByExample(user,userExample);
+        return SUCCESS;
+    }
+
+    @Override
+    public double changePassword(String username, String password) {
+        UserExample userExample=new UserExample();
+        userExample.createCriteria().andNameEqualTo(username);
+        List<User> users =userMapper.selectByExample(userExample);
+        User user=users.get(0);
+        user.setPassword(password);
+        userMapper.updateByExample(user,userExample);
+        return SUCCESS;
+    }
+
 }

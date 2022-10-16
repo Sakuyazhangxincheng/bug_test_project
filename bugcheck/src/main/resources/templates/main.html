@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>主页</title>
+    <style>
+        h1{
+            color: white;
+            padding: 20px;
+            font-size: 50px;
+            font-family: 华文行楷,serif;
+            text-align: right;
+        }
+        #div_title{
+            margin: 10px;
+            width: content-box;
+            height: 80px;
+            background-image: linear-gradient(to left,#1c1cf5, #cacafa);
+            border-radius: 25px;
+            box-shadow: 5px 5px 10px rgba(0 , 0 , 0 , 0.5);
+        }
+        #div_main{
+            margin: 10px;
+            width: 77%;
+            height: 600px;
+            background-color: #fff;
+            border-radius: 25px;
+            box-shadow: 0 0 10px rgba(0 , 0 , 0 , 0.5);
+            float: right;
+        }
+        #main_page{
+            margin-left: 50px;
+        }
+        #div_left{
+            font-size: 30px;
+            font-family: 华文行楷,serif;
+            margin: 10px;
+            width: 20%;
+            height: 600px;
+            /*background-color: #5757e5;*/
+            border-radius: 25px;
+            box-shadow: 0 0 10px rgba(0 , 0 , 0 , 0.5);
+            float: left;
+            background-image: linear-gradient(#1c1cf5, #cacafa);
+        }
+        #div_left ul{
+            list-style-type: none;
+        }
+        a{
+            color: white;
+            text-decoration-line: none;
+        }
+        hr{
+            color: white;
+            margin-left: 0;
+        }
+    </style>
+</head>
+<body>
+    <div id="div_title">
+        <h1>软件缺陷分析与预测系统</h1>
+    </div>
+    <div id="div_left">
+        <ul>
+            <li>
+<!--                <a href="main.html" target="mainFrame1">首页</a>-->
+            <a href="http://localhost:8080/toMain" target="_self">首页</a>
+            </li>
+            <hr>
+            <li>
+                <!--<a href="information.html" target="mainFrame1">用户中心</a>-->
+            <a href="http://localhost:8080/toUserCenter" target="_self">用户中心</a>
+            </li>
+            <hr>
+            <li>
+<!--                <a href="Login.html" target="mainFrame1">退出登录</a>-->
+            <a href="http://localhost:8080/toLogin" target="_self">退出登录</a>
+            </li>
+            <hr>
+        </ul>
+    </div>
+    <div id="div_main">
+        <div id="main_page">
+            <form name="uploadForm" method="post" id="form_main"
+                  enctype="multipart/form-data"
+                  th:action="@{/upload}">
+                <br><br><br>
+                <span>上传文件:   </span>
+                <br>
+                <input  type="file" name="upload" accept="text/csv"/>
+                <br><br><br>
+                算法选择：<select name="algorithm">
+                             <option value="逻辑回归">逻辑回归</option>
+                             <option value="KNN">KNN</option>
+                             <option value="SVM">SVM</option>
+                             <option value="Kmeans">Kmeans</option>
+                         </select>
+                <br><br><br>
+                <button v-on:click="send()" id="upload" type="button" >
+                    <br>
+                </button>
+<!--                <input type="button" id="upload" v-on:click="send()" value="检测">-->
+                <input type="reset"  value="重置">
+                <br><br><br>
+            </form>
+
+            <textarea cols="30" rows="10">此处展示训练结果</textarea>
+        </div>
+    </div>
+    <!-- Additional JS -->
+    <script th:src="@{/js/bootstrap.bundle.min.js?1413}" src="./js/bootstrap.bundle.min.js?1413"></script>
+    <script th:src="@{/js/blocs.min.js?3842}" src="./js/blocs.min.js?3842"></script>
+    <script th:src="@{/js/jqBootstrapValidation.js}" src="./js/jqBootstrapValidation.js"></script>
+    <script th:src="@{/js/formHandler.js?2118}" src="./js/formHandler.js?2118"></script>
+    <script th:src="@{/js/lazysizes.min.js}" src="./js/lazysizes.min.js" defer></script>
+
+    <script th:src="@{/js/jquery.min.js}"  type="text/javascript" charset="utf-8"></script>
+    <script th:src="@{/js/vue.js}"  type="text/javascript" charset="utf-8"></script>
+    <script th:src="@{/js/axios.min.js}"  type="text/javascript" charset="utf-8"></script>
+
+    <!--js-->
+    <script>
+        var main_page=new Vue({
+            el:"#form_main",
+            // data: {
+            //
+            // },
+            // data () {
+            //     return {
+            //
+            //     }
+            // },
+            methods:{
+                send:function (){
+                    //submit
+
+                    var theForm = document.getElementById("form_main");
+
+                    theForm.submit();
+
+
+
+                    /*let fileInput = $('#upload').get(0).files[0];
+                    console.info(fileInput);
+                    if(fileInput){
+                        $("#form_main").submit();
+                    }else{
+                        alert("请选择上传文件！");
+                    }*/
+                }
+            }
+        })
+    </script>
+</body>
+</html>
