@@ -7,10 +7,7 @@ import com.example.bugcheck.utils.Global;
 import com.example.bugcheck.utils.ReturnObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import static com.example.bugcheck.utils.Global.FAIL;
@@ -24,11 +21,18 @@ public class DataController {
 
     @PostMapping("/upload")
     @ResponseBody
-    public String draftContract(MultipartFile upload,String algorithm)
+    public String draftContract(MultipartFile upload)
     {
-        System.out.println("123");
+        //System.out.println("123");
         dataService.addFile(upload);
         dataService.write(upload);
+        return String.valueOf(SUCCESS);
+    }
+
+    @RequestMapping("/calculate/{algorithm}")
+    @ResponseBody
+    public String calculateResult(@PathVariable("algorithm")String algorithm)
+    {
         double data[][] =dataService.data();
         double result=FAIL;
         if(algorithm.equals("逻辑回归"))
@@ -43,9 +47,10 @@ public class DataController {
         {
             result=dataService.Perceptron(data);
         }
-        System.out.println("result");
+        //System.out.println("result");
         return String.valueOf(result);
     }
+
 
 
 

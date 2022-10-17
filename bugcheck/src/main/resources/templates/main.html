@@ -102,7 +102,7 @@
             </form>
             <iframe name="iframe" id="iframe" style="display:none"></iframe>
             <label>
-                <textarea cols="30" rows="10" readonly>此处展示训练结果</textarea>
+                <textarea id="ta_result" cols="30" rows="10" >此处展示训练结果</textarea>
             </label>
         </div>
     </div>
@@ -125,7 +125,6 @@
     // let outputTA = document.getElementById("ta_result");
     let test = document.getElementById("btn_test");
     uploadForm.submit();
-
     let main_page=new Vue({
         el:"#form_main",
         data: {
@@ -144,8 +143,8 @@
                     url: "calculate/" + algorithm
                 })
                     .then(function (value) {
-                        alert(value);
-                        outputTA.innerText = "123";
+                        // alert(value.data);
+                        outputTA.innerText= algorithm + "算法的预测准确率： " + value.data;
                     })
                     .catch();
                 }

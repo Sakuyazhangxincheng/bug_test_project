@@ -43,7 +43,6 @@ public class DataServiceImpl implements DataService {
 
         ArrayList<String> records = new ArrayList<>();
         records = readCsvByBufferedReader(filePath);
-        System.out.println();
 
         for(int x=1; x<records.size(); x++) {
             String[] lineRecords = records.get(x).split(",");
@@ -124,85 +123,6 @@ public class DataServiceImpl implements DataService {
             dataList.add(x-1, data);
             //break;
         }
-
-
-        //i == 997
-        //System.out.println(i);
-
-        //将data类里的数据存进二维数组
-        /*double[][] info = new double[i][62];
-        for(int j=0; j<dataList.size(); j++) {
-
-            info[j][0] = dataList.get(j).getCkOoNumberofprivatemethods();
-            info[j][1] = dataList.get(j).getLdhhLcom();
-            info[j][2] = dataList.get(j).getLdhhFanin();
-            info[j][3] = dataList.get(j).getNumberofnontrivialbugsfounduntil();
-            info[j][4] = dataList.get(j).getWchuNumberofpublicattributes();
-            info[j][5] = dataList.get(j).getWchuNumberofattributes();
-            info[j][6] = dataList.get(j).getCvswentropy();
-            info[j][7] = dataList.get(j).getLdhhNumberofpublicmethods();
-            info[j][8] = dataList.get(j).getWchuFanin();
-            info[j][9] = dataList.get(j).getLdhhNumberofprivateattributes();
-            info[j][10] = dataList.get(j).getCvsentropy();
-            info[j][11] = dataList.get(j).getLdhhNumberofpublicattributes();
-            info[j][12] = dataList.get(j).getWchuNumberofpublicmethods();
-            info[j][13] = dataList.get(j).getWchuNumberofmethods();
-            info[j][14] = dataList.get(j).getCkOoNumberofpublicattributes();
-            info[j][15] = dataList.get(j).getCkOoNoc();
-            info[j][16] = dataList.get(j).getNumberofcriticalbugsfounduntil();
-            info[j][17] = dataList.get(j).getCkOoWmc();
-            info[j][18] = dataList.get(j).getLdhhNumberofprivatemethods();
-            info[j][19] = dataList.get(j).getWchuNumberofprivateattributes();
-            info[j][20] = dataList.get(j).getWchuNoc();
-
-            info[j][21] = dataList.get(j).getCkOoFanout();
-            info[j][22] = dataList.get(j).getCvslogentropy();
-            info[j][23] = dataList.get(j).getLdhhNumberofattributesinherited();
-            info[j][24] = dataList.get(j).getCkOoNumberoflinesofcode();
-            info[j][25] = dataList.get(j).getCkOoDit();
-            info[j][26] = dataList.get(j).getWchuWmc();
-            info[j][27] = dataList.get(j).getLdhhNoc();
-            info[j][28] = dataList.get(j).getCkOoNumberofmethods();
-            info[j][29] = dataList.get(j).getCkOoNumberofattributesinherited();
-            info[j][30] = dataList.get(j).getWchuDit();
-
-            info[j][31] = dataList.get(j).getCkOoLcom();
-            info[j][32] = dataList.get(j).getCkOoFanin();
-            info[j][33] = dataList.get(j).getWchuNumberofattributesinherited();
-            info[j][34] = dataList.get(j).getCkOoRfc();
-            info[j][35] = dataList.get(j).getLdhhWmc();
-            info[j][36] = dataList.get(j).getLdhhNumberofattributes();
-            info[j][37] = dataList.get(j).getLdhhNumberoflinesofcode();
-            info[j][38] = dataList.get(j).getWchuFanout();
-            info[j][39] = dataList.get(j).getWchuLcom();
-            info[j][40] = dataList.get(j).getCkOoCbo();
-
-            info[j][41] = dataList.get(j).getWchuRfc();
-            info[j][42] = dataList.get(j).getCkOoNumberofattributes();
-            info[j][43] = dataList.get(j).getNumberofhighprioritybugsfounduntil();
-            info[j][44] = dataList.get(j).getCkOoNumberofprivateattributes();
-            info[j][45] = dataList.get(j).getNumberofmajorbugsfounduntil();
-            info[j][46] = dataList.get(j).getWchuNumberofpublicmethods();
-            info[j][47] = dataList.get(j).getLdhhDit();
-            info[j][48] = dataList.get(j).getWchuCbo();
-            info[j][49] = dataList.get(j).getCvslinentropy();
-            info[j][50] = dataList.get(j).getWchuNumberofmethodsinherited();
-
-            info[j][51] = dataList.get(j).getNumberofbugsfounduntil();
-            info[j][52] = dataList.get(j).getLdhhFanout();
-            info[j][53] = dataList.get(j).getLdhhNumberofmethodsinherited();
-            info[j][54] = dataList.get(j).getLdhhRfc();
-            info[j][55] = dataList.get(j).getCkOoNumberofmethodsinherited();
-            info[j][56] = dataList.get(j).getCkOoNumberofpublicmethods();
-            info[j][57] = dataList.get(j).getLdhhCbo();
-            info[j][58] = dataList.get(j).getWchuNumberoflinesofcode();
-            info[j][59] = dataList.get(j).getCvsexpentropy();
-            info[j][60] = dataList.get(j).getLdhhNumberofmethods();
-            info[j][61] = dataList.get(j).getClasses();
-        }
-*/
-
-
         for(int z=0;z<dataList.size();z++)
         {
             dataMapper.insert(dataList.get(z));
@@ -252,8 +172,7 @@ public class DataServiceImpl implements DataService {
         LogicalRegressionModel model = new LogicalRegressionModel();
         model.train(766, 100, train_data);
 
-        System.out.println("----------------------------------------------------------");
-        System.out.println("For the test data:");
+
         return model.getAccuracy(test_data);
     }
 

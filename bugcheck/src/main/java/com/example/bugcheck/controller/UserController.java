@@ -98,7 +98,7 @@ public class UserController {
     public ReturnObject<User> loginUser(@PathVariable("username")String username,
                                         @PathVariable("password")String password
                                         ){
-        System.out.println("123");
+        //System.out.println("123");
         User user = userService.loginUser(username,password);
         if(user==null){
             return new ReturnObject<>(Global.ERROR, null);
