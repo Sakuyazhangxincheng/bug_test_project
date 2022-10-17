@@ -4,12 +4,10 @@ import com.example.bugcheck.mapper.DataMapper;
 import com.example.bugcheck.pojo.table.Data;
 import com.example.bugcheck.pojo.table.DataExample;
 import com.example.bugcheck.service.DataService;
-import com.example.bugcheck.service.LogicalRegressionModel;
 import com.example.bugcheck.utils.Global;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-import com.csvreader.CsvReader;
 
 import java.io.*;
 import java.util.ArrayList;

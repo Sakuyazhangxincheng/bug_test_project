@@ -1,4 +1,4 @@
-package com.example.bugcheck.service;
+package com.example.bugcheck.service.impl;
 
 public class LogicalRegressionModel {
 

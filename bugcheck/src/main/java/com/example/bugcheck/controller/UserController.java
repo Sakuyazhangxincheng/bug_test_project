@@ -32,7 +32,7 @@ public class UserController {
 
     @RequestMapping("/")
     public String index() {
-        return "main";
+        return "Login";
     }
 
     @RequestMapping("/toMain")
@@ -42,12 +42,10 @@ public class UserController {
 
     @RequestMapping("/toLogin")
     public String loginFromRegister() {
-        //codeService.sendCodeRegister("3216232944@qq.com");
         return "Login";
     }
     @RequestMapping("/toRegister")
     public String registerFromLogin() {
-        //codeService.sendCodeRegister("3216232944@qq.com");
         return "Register";
     }
 
@@ -78,7 +76,6 @@ public class UserController {
     @GetMapping("/changeEmailAddress/{username}/{email}/{code}")
     @ResponseBody
     public String changeEmail(@PathVariable("username")String username,@PathVariable("email")String email,@PathVariable("code")String code){
-        //return String.valueOf(SUCCESS);
 
         int checkCode = codeService.checkCode(new Code(email, code), CHANGE);
         if (checkCode == SUCCESS)
@@ -106,11 +103,6 @@ public class UserController {
         if(user==null){
             return new ReturnObject<>(Global.ERROR, null);
         }else {
-            /*session.setAttribute("nowUser", user);
-            Cookie cookie = new Cookie("id", String.valueOf(user.getUserid()));
-            cookie.setPath("/");
-            response.addCookie(cookie);
-            System.out.println("登录 Cookie saved");*/
         }
         return new ReturnObject<>(SUCCESS, user);
     }
@@ -121,7 +113,6 @@ public class UserController {
                                        @PathVariable("password")String password,
                                        @PathVariable("email")String email,
                                        @PathVariable("code")String code){
-        //return String.valueOf(SUCCESS);
         User user=new User();
         user.setEmail(email);
         user.setName(username);
@@ -143,6 +134,4 @@ public class UserController {
     public String toMe(){
         return "index";
     }
-
-
     }
