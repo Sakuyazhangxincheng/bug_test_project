@@ -83,7 +83,8 @@
         <div id="main_page">
             <form name="uploadForm" method="post" id="form_main"
                   enctype="multipart/form-data"
-                  th:action="@{/upload}" target="iframe">
+                  th:action="@{/upload}">
+<!--                target="iframe"-->
                 <br><br><br>
                 <span>上传文件:   </span>
                 <br>
@@ -95,13 +96,14 @@
                              <option value="感知机">感知机</option>
                          </select>
                 <br><br><br>
-                <button v-on:click="send()" id="upload" type="button" >检测</button>
+<!--                <button v-on:click="send()" id="upload" type="button" >检测</button>-->
 <!--                <input type="button" id="upload" v-on:click="send()" value="检测">-->
+                <input type="submit" id="btn_submit" name="btn_submit" value="检测">
                 <input type="reset"  value="重置">
                 <br><br><br>
             </form>
-            <iframe name="iframe" id="iframe" style="display:none"></iframe>
-            <textarea cols="30" rows="10">此处展示训练结果</textarea>
+<!--            <iframe name="iframe" id="iframe" style="display:none"></iframe>-->
+            <textarea cols="30" rows="10" readonly>此处展示训练结果</textarea>
         </div>
     </div>
     <!-- Additional JS -->
@@ -114,39 +116,47 @@
     <script th:src="@{/js/jquery.min.js}"  type="text/javascript" charset="utf-8"></script>
     <script th:src="@{/js/vue.js}"  type="text/javascript" charset="utf-8"></script>
     <script th:src="@{/js/axios.min.js}"  type="text/javascript" charset="utf-8"></script>
-
+    <script th:src="@{/js/jquery.form.js}" src="../static/js/jquery.form.js"></script>
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
     <!--js-->
     <script>
-        let main_page=new Vue({
-            el:"#form_main",
-            data: {
-                OK :200,
-                ERROR:203,
-                FAIL:-1
-            },
-            methods:{
-                send:function (){
-                    //submit
-                    let uploadForm = document.getElementById("form_main");
-                    let outputTA = document.getElementById("ta_result");
-                    uploadForm.submit();
-
-                    // if(value.data === -1){
-                    //     alert("请选择文件文件！");
-                    // }else{
-                    //     outputTA.innerText = value;
-                    // }
-                    $("#iframe").load(function(){
-                        let text = $(this).contents().find("body").text(); //获取到的是json的字符串
-                        let j = $.parseJSON(text);  //json字符串转换成json对象
-                        if(j === -1){
-                            alert("请选择文件文件！");
-                        }else{
-                            outputTA.innerText = j;
-                        }
-                    })
-                }
-            }
+        // let main_page=new Vue({
+        //     el:"#form_main",
+        //     data: {
+        //         OK :200,
+        //         ERROR:203,
+        //         FAIL:-1
+        //     },
+        //     methods:{
+        //         send:function (){
+        //             //submit
+        //             let uploadForm = document.getElementById("form_main");
+        //             let outputTA = document.getElementById("ta_result");
+        //             uploadForm.submit();
+        //
+        //             // if(value.data === -1){
+        //             //     alert("请选择文件文件！");
+        //             // }else{
+        //             //     outputTA.innerText = value;
+        //             // }
+        //             $("#iframe").load(function(){
+        //                 let text = $(this).contents().find("body").text(); //获取到的是json的字符串
+        //                 let j = $.parseJSON(text);  //json字符串转换成json对象
+        //                 console.log(j);
+        //                 // if(j === -1){
+        //                 //     alert("请选择文件文件！");
+        //                 // }else{
+        //                 //     outputTA.innerText = j;
+        //                 // }
+        //             })
+        //         }
+        //     }
+        // })
+        $(function (){
+            alert("123");
+            $("#form_main").ajaxForm(function (data){
+                alert(data);
+            })
         })
     </script>
 </body>
