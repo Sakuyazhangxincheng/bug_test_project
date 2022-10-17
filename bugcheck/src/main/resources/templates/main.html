@@ -83,27 +83,27 @@
         <div id="main_page">
             <form name="uploadForm" method="post" id="form_main"
                   enctype="multipart/form-data"
-                  th:action="@{/upload}">
-<!--                target="iframe"-->
+                  th:action="@{/upload}" target="iframe">
                 <br><br><br>
                 <span>上传文件:   </span>
                 <br>
                 <input  type="file" name="upload" accept="text/csv"/>
                 <br><br><br>
-                算法选择：<select name="algorithm">
+                算法选择：<select name="algorithm" id="algorithm">
                              <option value="逻辑回归">逻辑回归</option>
                              <option value="KNN">KNN</option>
                              <option value="感知机">感知机</option>
                          </select>
                 <br><br><br>
-<!--                <button v-on:click="send()" id="upload" type="button" >检测</button>-->
-<!--                <input type="button" id="upload" v-on:click="send()" value="检测">-->
-                <input type="submit" id="btn_submit" name="btn_submit" value="检测">
+                <input type="submit" id="btn_submit" name="btn_submit" value="上传">
+                <button type="button" id="btn_test" v-on:click="getValue()">检测</button>
                 <input type="reset"  value="重置">
                 <br><br><br>
             </form>
-<!--            <iframe name="iframe" id="iframe" style="display:none"></iframe>-->
-            <textarea cols="30" rows="10" readonly>此处展示训练结果</textarea>
+            <iframe name="iframe" id="iframe" style="display:none"></iframe>
+            <label>
+                <textarea cols="30" rows="10" readonly>此处展示训练结果</textarea>
+            </label>
         </div>
     </div>
     <!-- Additional JS -->
@@ -120,44 +120,38 @@
     <script src="http://code.jquery.com/jquery-latest.js"></script>
     <!--js-->
     <script>
-        // let main_page=new Vue({
-        //     el:"#form_main",
-        //     data: {
-        //         OK :200,
-        //         ERROR:203,
-        //         FAIL:-1
-        //     },
-        //     methods:{
-        //         send:function (){
-        //             //submit
-        //             let uploadForm = document.getElementById("form_main");
-        //             let outputTA = document.getElementById("ta_result");
-        //             uploadForm.submit();
-        //
-        //             // if(value.data === -1){
-        //             //     alert("请选择文件文件！");
-        //             // }else{
-        //             //     outputTA.innerText = value;
-        //             // }
-        //             $("#iframe").load(function(){
-        //                 let text = $(this).contents().find("body").text(); //获取到的是json的字符串
-        //                 let j = $.parseJSON(text);  //json字符串转换成json对象
-        //                 console.log(j);
-        //                 // if(j === -1){
-        //                 //     alert("请选择文件文件！");
-        //                 // }else{
-        //                 //     outputTA.innerText = j;
-        //                 // }
-        //             })
-        //         }
-        //     }
-        // })
-        $(function (){
-            alert("123");
-            $("#form_main").ajaxForm(function (data){
-                alert(data);
-            })
-        })
+    <!--   form提交     -->
+    let uploadForm = document.getElementById("form_main");
+    // let outputTA = document.getElementById("ta_result");
+    let test = document.getElementById("btn_test");
+    uploadForm.submit();
+
+    let main_page=new Vue({
+        el:"#form_main",
+        data: {
+            OK :200,
+            ERROR:203,
+            FAIL:-1
+        },
+        methods:{
+            getValue:function (){
+
+                let outputTA = document.getElementById("ta_result");
+                let mySelect = document.getElementById("algorithm");
+                let algorithm = mySelect.options[mySelect.selectedIndex].value;
+                axios({
+                    method: "get",
+                    url: "calculate/" + algorithm
+                })
+                    .then(function (value) {
+                        alert(value);
+                        outputTA.innerText = "123";
+                    })
+                    .catch();
+                }
+            }
+    })
+
     </script>
 </body>
 </html>
