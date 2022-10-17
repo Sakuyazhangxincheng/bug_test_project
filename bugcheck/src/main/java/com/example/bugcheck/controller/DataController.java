@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import static com.example.bugcheck.utils.Global.FAIL;
 import static com.example.bugcheck.utils.Global.SUCCESS;
 
 @Controller
@@ -29,9 +30,19 @@ public class DataController {
         dataService.addFile(upload);
         dataService.write(upload);
         double data[][] =dataService.data();
-        //double result=dataService.logicalRegression(data);
-        //double result=dataService.KNN(data);
-        double result=dataService.Perceptron(data);
+        double result=FAIL;
+        if(algorithm.equals("逻辑回归"))
+        {
+            result=dataService.logicalRegression(data);
+        }
+        if(algorithm.equals("KNN"))
+        {
+            result=dataService.KNN(data);
+        }
+        if(algorithm.equals("感知机"))
+        {
+            result=dataService.Perceptron(data);
+        }
         System.out.println("result");
         return String.valueOf(result);
     }

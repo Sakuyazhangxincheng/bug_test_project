@@ -83,7 +83,7 @@
         <div id="main_page">
             <form name="uploadForm" method="post" id="form_main"
                   enctype="multipart/form-data"
-                  th:action="@{/upload}">
+                  th:action="@{/upload}" target="iframe">
                 <br><br><br>
                 <span>上传文件:   </span>
                 <br>
@@ -100,7 +100,7 @@
                 <input type="reset"  value="重置">
                 <br><br><br>
             </form>
-
+            <iframe name="iframe" id="iframe" style="display:none"></iframe>
             <textarea cols="30" rows="10">此处展示训练结果</textarea>
         </div>
     </div>
@@ -117,33 +117,34 @@
 
     <!--js-->
     <script>
-        var main_page=new Vue({
+        let main_page=new Vue({
             el:"#form_main",
-            // data: {
-            //
-            // },
-            // data () {
-            //     return {
-            //
-            //     }
-            // },
+            data: {
+                OK :200,
+                ERROR:203,
+                FAIL:-1
+            },
             methods:{
                 send:function (){
                     //submit
+                    let uploadForm = document.getElementById("form_main");
+                    let outputTA = document.getElementById("ta_result");
+                    uploadForm.submit();
 
-                    var theForm = document.getElementById("form_main");
-
-                    theForm.submit();
-
-
-
-                    /*let fileInput = $('#upload').get(0).files[0];
-                    console.info(fileInput);
-                    if(fileInput){
-                        $("#form_main").submit();
-                    }else{
-                        alert("请选择上传文件！");
-                    }*/
+                    // if(value.data === -1){
+                    //     alert("请选择文件文件！");
+                    // }else{
+                    //     outputTA.innerText = value;
+                    // }
+                    $("#iframe").load(function(){
+                        let text = $(this).contents().find("body").text(); //获取到的是json的字符串
+                        let j = $.parseJSON(text);  //json字符串转换成json对象
+                        if(j === -1){
+                            alert("请选择文件文件！");
+                        }else{
+                            outputTA.innerText = j;
+                        }
+                    })
                 }
             }
         })
