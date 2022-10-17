@@ -12,13 +12,16 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import static com.example.bugcheck.utils.Global.*;
+import static java.lang.Math.random;
 
 @Service
 public class DataServiceImpl implements DataService {
     @Autowired
     private DataMapper dataMapper;
+
 
     @Override
     public double result(List<Data> dataList) {
@@ -235,7 +238,7 @@ public class DataServiceImpl implements DataService {
         DataExample dataExample = new DataExample();
         dataExample.createCriteria().andIdIsNotNull();
         int length=dataMapper.countByExample(dataExample);
-        int train_len = 500;
+        int train_len = length*4/5;
         int test_len = length - train_len;
         //数组拆分为训练集和测试集
         double[][] train_data = new double[train_len][62];
@@ -253,6 +256,8 @@ public class DataServiceImpl implements DataService {
         System.out.println("For the test data:");
         return model.getAccuracy(test_data);
     }
+
+
 
     @Override
     public double[][] data() {
@@ -335,6 +340,130 @@ public class DataServiceImpl implements DataService {
 
         return info;
     }
+
+    @Override
+    public double KNN(double[][] info) {
+        KNN knn=new KNN();
+        int k=5;int feature=61;
+        DataExample dataExample = new DataExample();
+        dataExample.createCriteria().andIdIsNotNull();
+        int length=dataMapper.countByExample(dataExample);
+        try {
+            int train_len = length*9/10;
+            int test_len = length - train_len;
+            //数组拆分为训练集和测试集
+            Double[][] train_data = new Double[train_len][62];
+            Double[][] test_data = new Double[test_len][62];
+            for(int j=0; j<train_len; j++)
+                for(int v=0; v<62; v++)
+                    train_data[j][v] = info[j][v];
+            //System.arraycopy(info[j], 0, train_data[j], 0, 62);
+            for(int j=0; j<test_len; j++)
+                for(int v=0; v<62; v++)
+                    test_data[j][v] = info[j+train_len][v];
+            //System.arraycopy(info[j+train_len], 0, test_data[j], 0, 62);
+            //DrawPic drawPic = new DrawPic();
+            List<Double[]> trains = new ArrayList<>();
+            List<Double[]> tests  = new ArrayList<>();
+            for(int i=0; i < train_data.length; i++)
+                trains.add(train_data[i]);
+            for(int i=0; i < test_data.length; i++)
+                tests.add(test_data[i]);
+
+
+            double crr = 0.0;
+            for (Double[] test : tests) {
+                Map<String, Object> classifyResult = knn.cal(test,trains,k,feature);
+                Double type = Double.parseDouble(classifyResult.get("type")+"");
+                //test[feature] = type+2;
+                System.out.println(type + "|" + test[feature]);
+                //System.out.println(classifyResult.toString());
+
+                if(type.equals(test[feature]))
+                    crr++;
+            }
+            double accuracy = crr/tests.size();
+            System.out.println("Acc:" + accuracy);
+            return accuracy;
+
+            //drawPic.add(trains, 0d);
+            //drawPic.add(trains, 1d);
+            //drawPic.add(tests, 2d);
+            //drawPic.add(tests, 3d);
+            //drawPic.draw("KNN TEST RESULT:");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return FAIL;
+
+
+        /*int k = 5; // 参数一，k近邻
+        int feature = 61; // 参数二，特征的个数*/
+    }
+
+    public double Perceptron(double[][] info)
+    {
+        PerceptronModel perceptron=new PerceptronModel();
+        int column = 62;
+        DataExample dataExample = new DataExample();
+        dataExample.createCriteria().andIdIsNotNull();
+        int length=dataMapper.countByExample(dataExample);
+        int train_len = length*4/5;
+        int test_len = length - train_len;
+        perceptron.arrayList=new ArrayList<>();
+
+
+        for(int i=0; i<perceptron.w.length; i++)
+            perceptron.w[i] = random()*10;
+
+        //ArrayList<String> records = new ArrayList<>();
+
+
+        //records = readCsvByBufferedReader("JDT.csv");
+
+        for(int i=0; i< train_len; i++){
+            double[] drecord = new double[column];
+            double[] tdrecord = new double[drecord.length-1];
+
+            for(int v=0; v< column; v++) {
+                drecord[v] = info[i][v];
+                if(drecord[drecord.length - 1] == 0.0)
+                    drecord[drecord.length - 1] = -1.0;
+                if(v != (column-1))
+                    tdrecord[v] = drecord[v];
+            }
+
+            Point P = new Point(tdrecord, drecord[drecord.length-1]);
+            perceptron.arrayList.add(P);
+        }
+        boolean classify = perceptron.classify();
+
+        double accuracy = 0;
+        for(int i=train_len; i<length; i++) {
+            double[] drecord = new double[column];
+            double[] tdrecord = new double[drecord.length-1];
+
+            for(int v=0; v< column; v++) {
+                drecord[v] = info[i][v];
+                if(drecord[drecord.length - 1] == 0.0)
+                    drecord[drecord.length - 1] = -1.0;
+                if(v != (column-1))
+                    tdrecord[v] = drecord[v];
+            }
+
+            double answer = 0;
+            for(int y=0; y<tdrecord.length; y++){
+                answer += tdrecord[y] * perceptron.w[y];
+            }
+
+            if((answer * drecord[column-1]) > 0)
+                accuracy++;
+            //System.out.println(drecord[lineRecords.length-1] + "|" + answer);
+        }
+        accuracy=accuracy/test_len;
+        return accuracy;
+    }
+
 
 
     public static ArrayList<String> readCsvByBufferedReader(String filePath) {

@@ -29,7 +29,9 @@ public class DataController {
         dataService.addFile(upload);
         dataService.write(upload);
         double data[][] =dataService.data();
-        double result=dataService.logicalRegression(data);
+        //double result=dataService.logicalRegression(data);
+        //double result=dataService.KNN(data);
+        double result=dataService.Perceptron(data);
         System.out.println("result");
         return String.valueOf(result);
     }
