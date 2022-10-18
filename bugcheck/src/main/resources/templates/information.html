@@ -2,10 +2,11 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>用户信息管理</title>
+    <title>软件缺陷预测与分析系统—用户信息管理</title>
     <style>
         body{
-            background-image: url("../static/img/2.jpg");
+            /*background-image: url("../static/img/2.jpg");*/
+            background: url("https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg.tukuppt.com%2Fpng_preview%2F00%2F40%2F17%2Fg5ow4jHKlo.jpg%21%2Ffw%2F780&refer=http%3A%2F%2Fimg.tukuppt.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1668707856&t=d156d894080913b9d7d355d15f35a497");
             background-size: cover;
         }
         #div_main{
@@ -16,7 +17,7 @@
             background-color: rgba(255 , 255 , 255 , 0.3);
             border-radius: 25px;
             box-shadow: 0 0 10px rgba(0 , 0 , 0 , 0.5);
-            margin: 8% 30%;
+            margin: 8% 31%;
             font-size: 15px;
         }
         #div_guide{
@@ -54,7 +55,9 @@
             text-decoration-line: none;
             z-index: 2;
             position: absolute;
-            margin-top: 30px;
+            margin-top: 35px;
+            font-size: 35px;
+            margin-left: 40px;
         }
         img{
             max-height: 120px ;
@@ -66,19 +69,13 @@
         #a_1{
             margin-left: 30px;
         }
-        #a_2{
-            margin-left: 30px;
-        }
-        #a_3{
-            margin-left: 30px;
-        }
         .btn{
             position: absolute;
             font-family: 华文行楷,serif;
             font-size: 25px;
             width: 200px;
             height: 50px;
-            margin-left: 35%;
+            margin-left: 33%;
             border-radius: 10px;
         }
         #btn_changePassword{
@@ -94,21 +91,21 @@
         <ul>
             <li>
                 <div class="div_guide">
-                    <img src="../static/img/0.png" >
+                    <img src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fbpic.51yuansu.com%2Fpic3%2Fcover%2F03%2F24%2F26%2F5b7239fd27f80_610.jpg&refer=http%3A%2F%2Fbpic.51yuansu.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1668707597&t=e964fdf8dcbba9e2c3da52529b59fc34" >
                     <!--                <a href="main.html" target="mainFrame1">首页</a>-->
                     <a href="http://localhost:8080/toMain" target="_self" id="a_1">首页</a>
                 </div>
             </li>
             <li>
                 <div class="div_guide">
-                    <img src="../static/img/0.png" >
+                    <img src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fbpic.51yuansu.com%2Fpic3%2Fcover%2F03%2F24%2F26%2F5b7239fd27f80_610.jpg&refer=http%3A%2F%2Fbpic.51yuansu.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1668707597&t=e964fdf8dcbba9e2c3da52529b59fc34" >
                     <!--<a href="information.html" target="mainFrame1">用户中心</a>-->
                     <a href="http://localhost:8080/toUserCenter" target="_self" id="a_2">用户中心</a>
                 </div>
             </li>
             <li>
                 <div class="div_guide">
-                    <img src="../static/img/0.png" >
+                    <img src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fbpic.51yuansu.com%2Fpic3%2Fcover%2F03%2F24%2F26%2F5b7239fd27f80_610.jpg&refer=http%3A%2F%2Fbpic.51yuansu.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1668707597&t=e964fdf8dcbba9e2c3da52529b59fc34" >
                     <!--                <a href="Login.html" target="mainFrame1">退出登录</a>-->
                     <a href="http://localhost:8080/toLogin" target="_self" id="a_3">退出登录</a>
                 </div>
