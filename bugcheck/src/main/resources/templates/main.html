@@ -5,7 +5,7 @@
     <title>主页</title>
     <style>
         body{
-            background-image: url("2.jpg");
+            background: url("../static/img/2.jpg");
             background-size: cover;
         }
         #div_main{
@@ -87,8 +87,11 @@
             width: 100px;
             height: 25px;
             /*left: 45%;*/
+            border-radius: 10px;
         }
         #btn_file{
+            position: absolute;
+            height: 25px;
             width: 45%;
             margin-left: 150px;
         }
@@ -118,21 +121,21 @@
         <ul>
             <li>
                 <div class="div_guide">
-                    <img src="0.png" >
+                    <img src="../static/img/0.png" >
 <!--                <a href="main.html" target="mainFrame1">首页</a>-->
                     <a href="http://localhost:8080/toMain" target="_self" id="a_1">首页</a>
                 </div>
             </li>
             <li>
                 <div class="div_guide">
-                    <img src="0.png" >
+                    <img src="../static/img/0.png" >
                 <!--<a href="information.html" target="mainFrame1">用户中心</a>-->
                      <a href="http://localhost:8080/toUserCenter" target="_self" id="a_2">用户中心</a>
                 </div>
             </li>
             <li>
                 <div class="div_guide">
-                    <img src="0.png" >
+                    <img src="../static/img/0.png" >
 <!--                <a href="Login.html" target="mainFrame1">退出登录</a>-->
                     <a href="http://localhost:8080/toLogin" target="_self" id="a_3">退出登录</a>
                 </div>
@@ -146,7 +149,7 @@
                   th:action="@{/upload}" target="iframe">
                 <br><br>
                 <span>上传文件:</span>
-                <input  type="file" name="upload" accept="text/csv" class="btn" id="btn_file">
+                <input  type="file" name="upload" accept="text/csv"  id="btn_file">
                 <input type="submit" id="btn_submit" name="btn_submit" value="上传" class="btn">
                 <br><br><br><br>
                 <span>算法选择:</span>
