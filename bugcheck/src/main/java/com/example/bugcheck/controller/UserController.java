@@ -32,8 +32,9 @@ public class UserController {
 
     @RequestMapping("/")
     public String index() {
-        return "main";
+        return "Login";
     }
+
 
     @RequestMapping("/toMain")
     public String mainFromLogin() {

@@ -29,6 +29,8 @@ public class DataController {
         return String.valueOf(SUCCESS);
     }
 
+
+
     @RequestMapping("/calculate/{algorithm}")
     @ResponseBody
     public String calculateResult(@PathVariable("algorithm")String algorithm)

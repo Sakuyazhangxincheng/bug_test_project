@@ -4,105 +4,166 @@
     <meta charset="UTF-8">
     <title>主页</title>
     <style>
-        h1{
-            color: white;
-            padding: 20px;
-            font-size: 50px;
-            font-family: 华文行楷,serif;
-            text-align: right;
-        }
-        #div_title{
-            margin: 10px;
-            width: content-box;
-            height: 80px;
-            background-image: linear-gradient(to left,#1c1cf5, #cacafa);
-            border-radius: 25px;
-            box-shadow: 5px 5px 10px rgba(0 , 0 , 0 , 0.5);
+        body{
+            background-image: url("2.jpg");
+            background-size: cover;
         }
         #div_main{
-            margin: 10px;
-            width: 77%;
-            height: 600px;
-            background-color: #fff;
+            /*margin: 10px;*/
+            position: absolute;
+            width: 40%;
+            height: 400px;
+            background-color: rgba(255 , 255 , 255 , 0.3);
             border-radius: 25px;
             box-shadow: 0 0 10px rgba(0 , 0 , 0 , 0.5);
-            float: right;
+            margin: 8% 30%;
+            font-size: 15px;
         }
-        #main_page{
-            margin-left: 50px;
-        }
-        #div_left{
+        #div_guide{
             font-size: 30px;
             font-family: 华文行楷,serif;
-            margin: 10px;
-            width: 20%;
-            height: 600px;
-            /*background-color: #5757e5;*/
-            border-radius: 25px;
-            box-shadow: 0 0 10px rgba(0 , 0 , 0 , 0.5);
-            float: left;
-            background-image: linear-gradient(#1c1cf5, #cacafa);
+            margin: 0 15%;
+            width: 80%;
         }
-        #div_left ul{
+        .div_guide{
+            margin-top: 0;
+            vertical-align: middle;
+            width: 120px;
+            height: 120px;
+            margin-left: 20%;
+        }
+        ul{
             list-style-type: none;
+            display: inline-block;
+        }
+        li{
+            display: inline-block;
+            width:300px;
+            height:20px;
+            text-align:center;
+            line-height:51px;
+            font-weight: 400;
+            float: none;
+        }
+        li:hover{
+            cursor:pointer;
+            font-weight:900;
         }
         a{
-            color: white;
+            color: black;
             text-decoration-line: none;
+            z-index: 2;
+            position: absolute;
+            margin-top: 30px;
         }
-        hr{
-            color: white;
-            margin-left: 0;
+        img{
+            max-height: 120px ;
+            max-width: 120px;
+            z-index: 1;
+            position: absolute;
+
+        }
+        #a_1{
+            margin-left: 30px;
+        }
+        #a_2{
+            margin-left: 30px;
+        }
+        #a_3{
+            margin-left: 30px;
+        }
+        span{
+            direction: ltr;
+            font-style: normal;
+            font-family: 华文行楷, serif;
+            position: absolute;
+            text-align: left;
+            font-size: 20px;
+            margin-left: 50px;
+        }
+        .btn{
+            position: absolute;
+            /*font-family: 华文行楷,serif;*/
+            width: 100px;
+            height: 25px;
+            /*left: 45%;*/
+        }
+        #btn_file{
+            width: 45%;
+            margin-left: 150px;
+        }
+        #btn_submit{
+            margin-left: 400px;
+        }
+        #btn_algorithm{
+            width: 30%;
+            margin-left: 150px;
+        }
+        #btn_test{
+            margin-left: 100px;
+        }
+        #btn_reset{
+            margin-left: 400px;
+        }
+        #ta_result{
+            margin-left: 90px;
         }
     </style>
 </head>
 <body>
-    <div id="div_title">
-        <h1>软件缺陷分析与预测系统</h1>
-    </div>
-    <div id="div_left">
+<!--    <div id="div_title">-->
+<!--        <h1>软件缺陷分析与预测系统</h1>-->
+<!--    </div>-->
+    <div id="div_guide">
         <ul>
             <li>
+                <div class="div_guide">
+                    <img src="0.png" alt="">
 <!--                <a href="main.html" target="mainFrame1">首页</a>-->
-            <a href="http://localhost:8080/toMain" target="_self">首页</a>
+                    <a href="http://localhost:8080/toMain" target="_self" id="a_1">首页</a>
+                </div>
             </li>
-            <hr>
             <li>
+                <div class="div_guide">
+                    <img src="0.png" alt="">
                 <!--<a href="information.html" target="mainFrame1">用户中心</a>-->
-            <a href="http://localhost:8080/toUserCenter" target="_self">用户中心</a>
+                     <a href="http://localhost:8080/toUserCenter" target="_self" id="a_2">用户中心</a>
+                </div>
             </li>
-            <hr>
             <li>
+                <div class="div_guide">
+                    <img src="0.png" alt="">
 <!--                <a href="Login.html" target="mainFrame1">退出登录</a>-->
-            <a href="http://localhost:8080/toLogin" target="_self">退出登录</a>
+                    <a href="http://localhost:8080/toLogin" target="_self" id="a_3">退出登录</a>
+                </div>
             </li>
-            <hr>
         </ul>
     </div>
     <div id="div_main">
-        <div id="main_page">
+        <div id="div_main_page">
             <form name="uploadForm" method="post" id="form_main"
                   enctype="multipart/form-data"
                   th:action="@{/upload}" target="iframe">
-                <br><br><br>
-                <span>上传文件:   </span>
-                <br>
-                <input  type="file" name="upload" accept="text/csv"/>
-                <br><br><br>
-                算法选择：<select name="algorithm" id="algorithm">
+                <br><br>
+                <span>上传文件:</span>
+                <input  type="file" name="upload" accept="text/csv" class="btn" id="btn_file">
+                <input type="submit" id="btn_submit" name="btn_submit" value="上传" class="btn">
+                <br><br><br><br>
+                <span>算法选择:</span>
+                <select name="algorithm" id="btn_algorithm" class="btn">
                              <option value="逻辑回归">逻辑回归</option>
                              <option value="KNN">KNN</option>
                              <option value="感知机">感知机</option>
                          </select>
-                <br><br><br>
-                <input type="submit" id="btn_submit" name="btn_submit" value="上传">
-                <button type="button" id="btn_test" v-on:click="getValue()">检测</button>
-                <input type="reset"  value="重置">
-                <br><br><br>
+                <br><br><br><br>
+<!--                <input type="submit" id="btn_submit" name="btn_submit" value="上传">-->
+                <button type="button" id="btn_test" class="btn" v-on:click="getValue()">检测</button>
+                <input type="reset"  id="btn_reset" class="btn" value="重置">
+                <br><br><br><br>
             </form>
             <iframe name="iframe" id="iframe" style="display:none"></iframe>
             <label>
-                <textarea id="ta_result" cols="30" rows="10" >此处展示训练结果</textarea>
+                <textarea id="ta_result" cols="50" rows="3" readonly>此处展示训练结果</textarea>
             </label>
         </div>
     </div>
@@ -136,15 +197,15 @@
             getValue:function (){
 
                 let outputTA = document.getElementById("ta_result");
-                let mySelect = document.getElementById("algorithm");
+                let mySelect = document.getElementById("btn_algorithm");
                 let algorithm = mySelect.options[mySelect.selectedIndex].value;
                 axios({
                     method: "get",
                     url: "calculate/" + algorithm
                 })
                     .then(function (value) {
-                        // alert(value.data);
-                        outputTA.innerText= algorithm + "算法的预测准确率： " + value.data;
+                        // alert(value);
+                        outputTA.innerText = algorithm + "算法的预测准确率为: " + value.data;
                     })
                     .catch();
                 }
