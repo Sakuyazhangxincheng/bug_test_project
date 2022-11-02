@@ -44,8 +44,13 @@ public class UserServiceImpl implements UserService {
         userExample.createCriteria().andPasswordEqualTo(password).andNameEqualTo(name);
         List<User> users =userMapper.selectByExample(userExample);
         if(users!=null){
-            if(users.size()==1) return users.get(0);
-            else return null;
+            if(users.size()==1)
+            {
+                return users.get(0);
+            }
+            else {
+                return null;
+            }
         }
         else return null;
     }

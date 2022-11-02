@@ -21,4 +21,6 @@ public interface DataService {
     double KNN(double[][] info);
 
     double Perceptron(double[][] info);
+
+
 }

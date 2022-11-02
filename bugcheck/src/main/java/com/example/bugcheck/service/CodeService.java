@@ -18,6 +18,7 @@ public interface CodeService {
     //获取验证码
     String getCode(String email,int type);
 
+    //
     void sendSimpleMail(String to, String subject, String content);
 
     int sendCodeRegister(String email);
