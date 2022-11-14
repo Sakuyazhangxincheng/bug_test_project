@@ -24,12 +24,12 @@ class UserServiceImplTest {
     private UserMapper userMapper;
 
     @Autowired
-    UserServiceImpl userService;
+    private UserServiceImpl userService;
 
-    UserServiceImplTest userServiceImplTest;
+
     @BeforeEach
     void setUp() {
-        userServiceImplTest = new UserServiceImplTest();
+
 
         System.out.println("test prepare is finished");
     }
@@ -37,7 +37,7 @@ class UserServiceImplTest {
     @AfterEach
     void tearDown() {
         System.out.println("test finisher");
-        userServiceImplTest= null;
+
     }
 
     @Test
@@ -90,7 +90,7 @@ class UserServiceImplTest {
     @Test
     void changeEmail() {
         assertEquals(SUCCESS,userService.changeEmail("zcx","123213213"));
-        
+
         //这个测试用例没有通过
         assertEquals(FAIL,userService.changeEmail("abcabc","4124124"));
     }
