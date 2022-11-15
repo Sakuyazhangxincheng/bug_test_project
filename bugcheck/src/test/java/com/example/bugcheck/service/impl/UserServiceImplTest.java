@@ -29,8 +29,6 @@ class UserServiceImplTest {
 
     @BeforeEach
     void setUp() {
-
-
         System.out.println("test prepare is finished");
     }
 
