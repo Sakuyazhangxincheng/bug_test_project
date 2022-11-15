@@ -14,6 +14,7 @@ import static com.example.bugcheck.utils.Global.SUCCESS;
 @Service
 public class UserServiceImpl implements UserService {
 
+    //自动 new 分配
     @Autowired
     private UserMapper userMapper;
 
