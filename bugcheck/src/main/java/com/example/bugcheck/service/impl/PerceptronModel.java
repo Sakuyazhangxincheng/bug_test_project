@@ -60,7 +60,6 @@ public class PerceptronModel {
             w[i] += eta * point.y * point.x[i];
         }
         b += eta * point.y;
-        return;
     }
 
     public static ArrayList<String> readCsvByBufferedReader(String filePath) {
