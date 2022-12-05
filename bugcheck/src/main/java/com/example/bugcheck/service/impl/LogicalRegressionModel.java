@@ -31,6 +31,26 @@ public class LogicalRegressionModel {
         return result;
     }
 
+    double getResultOfOrigin(double[] array_x)
+    {
+        double h = 0.0;
+        double g = 0.0;
+        int result = 0;
+        for(int i=0; i<array_w.length; i++) {
+            if(i == 0)
+                h += array_w[i];
+            else
+                h += array_w[i] * array_x[i-1];
+        }
+        g = 1 / (1 + Math.exp(-h));
+        if(g==1)
+            g=0.9999;
+        if(g==0)
+            g=0.0001;
+        return g;
+    }
+
+
 
     //参数更新 批量梯度下降
     void updateW(double[][] data){
@@ -67,6 +87,10 @@ public class LogicalRegressionModel {
     //计算准确率
     public double getAccuracy(double[][] data){
         double numOfT = 0.0;
+        double TP = 0.0;
+        double FP=0.0;
+        double FN=0.0;
+        double TN=0.0;
         double[] array_X = new double[numOfColumn];
 
         for(int i=0; i<data.length; i++){
@@ -74,9 +98,22 @@ public class LogicalRegressionModel {
                 array_X[z] = data[i][z];
             if(getResult(array_X) == array_X[numOfColumn - 1])
                 numOfT++;
+            if(getResult(array_X)==1.0 && array_X[numOfColumn - 1]==1.0)
+                TP++;
+            if(getResult(array_X)==1.0 && array_X[numOfColumn - 1]==0.0)
+                FP++;
+            if(getResult(array_X)==0.0 && array_X[numOfColumn - 1]==1.0)
+                FN++;
+            if(getResult(array_X)==0.0 && array_X[numOfColumn - 1]==0.0)
+                TN++;
+            loss+=(array_X[numOfColumn - 1]*Math.log(getResultOfOrigin(array_X))+(1-array_X[numOfColumn - 1])*Math.log(1-getResultOfOrigin(array_X)));
         }
+        loss=0-loss/(data.length);
         double acc = numOfT / data.length;
         System.out.println("the accuracy is " + acc);
+        double Recall=TP/(TP+FN);
+        double Precision=TP/(TP+FP);
+        double F1=2*(Precision*Recall)/(Precision+Recall);
         return acc;
     }
 

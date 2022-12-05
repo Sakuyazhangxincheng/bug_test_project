@@ -86,6 +86,7 @@ public class UserController {
             return  String.valueOf(CODE_ERROR);
         }
     }
+
     @GetMapping("/changePassword/{username}/{password}")
     @ResponseBody
     public String changePassword(@PathVariable("username")String username,@PathVariable("password")String password){
@@ -100,12 +101,12 @@ public class UserController {
                                         @PathVariable("password")String password
                                         ){
         //System.out.println("123");
-        User user = userService.loginUser(username,password);
-        if(user==null){
+        int user = userService.loginUser(username,password);
+        if(user==FAIL){
             return new ReturnObject<>(Global.ERROR, null);
         }else {
         }
-        return new ReturnObject<>(SUCCESS, user);
+        return new ReturnObject<>(SUCCESS, null);
     }
 
     @GetMapping("/register/{username}/{password}/{email}/{code}")

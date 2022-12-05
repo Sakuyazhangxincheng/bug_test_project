@@ -1,6 +1,8 @@
 package com.example.bugcheck.utils;
 
 public class Global {
+    public static final int WRONGPASSWORD=-2;
+    public static final int WRONGNAME = -3;
     public static final int SUCCESS = 200;
     public static final int FAIL = -1;
     public static final int ERROR = 203;

@@ -13,7 +13,7 @@ public interface UserService {
     /*
      * 同样,登陆成功返回用户实体(包含从数据库中查到的所有字段),否则返回null
      * */
-    User loginUser(String username, String password);
+    int loginUser(String username, String password);
 
     List<User> listUser();
 

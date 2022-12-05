@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-import static com.example.bugcheck.utils.Global.SUCCESS;
+import static com.example.bugcheck.utils.Global.*;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -40,20 +40,37 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User loginUser(String name, String password) {
+    public int loginUser(String name, String password) {
+        UserExample userExample2 = new UserExample();
+        userExample2.createCriteria().andNameEqualTo(name);
+        UserExample userExample3 = new UserExample();
+        userExample3.createCriteria().andPasswordEqualTo(password);
+        List<User> users2 =userMapper.selectByExample(userExample2);
+        List<User> users3 =userMapper.selectByExample(userExample3);
+
         UserExample userExample = new UserExample();
         userExample.createCriteria().andPasswordEqualTo(password).andNameEqualTo(name);
         List<User> users =userMapper.selectByExample(userExample);
         if(users!=null){
             if(users.size()==1)
             {
-                return users.get(0);
+                return SUCCESS;
             }
-            else {
-                return null;
+
+            else
+            {
+                return FAIL;
             }
         }
-        else return null;
+        else if(users2!=null){
+            return WRONGPASSWORD;
+        }
+        else if(users3!=null){
+            return WRONGNAME;
+        }
+        else
+        {
+            return FAIL;}
     }
 
     @Override

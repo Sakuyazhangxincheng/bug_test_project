@@ -14,6 +14,7 @@ public class Code {
     }
 
     public String getUsername() {
+        setUsername("123");
         return email;
     }
 
