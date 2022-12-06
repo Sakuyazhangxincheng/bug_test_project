@@ -51,7 +51,7 @@ public class UserServiceImpl implements UserService {
         UserExample userExample = new UserExample();
         userExample.createCriteria().andPasswordEqualTo(password).andNameEqualTo(name);
         List<User> users =userMapper.selectByExample(userExample);
-        if(users!=null){
+        if(users.size()!=0){
             if(users.size()==1)
             {
                 return SUCCESS;
@@ -62,15 +62,16 @@ public class UserServiceImpl implements UserService {
                 return FAIL;
             }
         }
-        else if(users2!=null){
+        else if(users2.size()!=0){
             return WRONGPASSWORD;
         }
-        else if(users3!=null){
+        else if(users3.size()!=0){
             return WRONGNAME;
         }
         else
         {
-            return FAIL;}
+            return FAIL;
+        }
     }
 
     @Override

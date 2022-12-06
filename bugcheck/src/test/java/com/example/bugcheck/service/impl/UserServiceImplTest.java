@@ -57,13 +57,11 @@ class UserServiceImplTest {
     @Test
     void loginUser() {
 
-
-
-        UserExample userExample = new UserExample();
-        String password="123123";
-        String name="zxc";
-        userExample.createCriteria().andPasswordEqualTo(password).andNameEqualTo(name);
-        List<User> users =userMapper.selectByExample(userExample);
+//        UserExample userExample = new UserExample();
+//        String password="123123";
+//        String name="zxc";
+//        userExample.createCriteria().andPasswordEqualTo(password).andNameEqualTo(name);
+//        List<User> users =userMapper.selectByExample(userExample);
 
         //assertEquals(users.get(0).getName(),userService.loginUser(users.get(0).getName(),users.get(0).getPassword()).getName());
         //assertEquals(users.get(0).getId(),userService.loginUser(users.get(0).getName(),users.get(0).getPassword()).getId());
@@ -71,11 +69,44 @@ class UserServiceImplTest {
         //assertEquals(users.get(0).getEmail(),userService.loginUser(users.get(0).getName(),users.get(0).getPassword()).getEmail());
 
 
-        users.get(0).setPassword("123");
+        //users.get(0).setPassword("123");
         //assertEquals(-1,userService.loginUser(users.get(0).getName(),users.get(0).getPassword()));
         //assertEquals(-1,userService.loginUser(users.get(0).getName(),users.get(0).getPassword()));
         //assertEquals(-1,userService.loginUser(users.get(0).getName(),users.get(0).getPassword()));
         //assertEquals(-1,userService.loginUser(users.get(0).getName(),users.get(0).getPassword()));
+
+        //黑盒测试  登录功能
+        UserExample userExample = new UserExample();
+        String password;
+        String name;
+        //测试用例1
+        name = "zxc";
+        password = "123123";
+        assertEquals(200,userService.loginUser(name,password));
+        //测试用例2
+        name = "234213";
+        password = "123213213";
+        assertEquals(-2,userService.loginUser(name,password));
+        //测试用例3
+        name = "zcx";
+        password = "123213213";
+        assertEquals(200,userService.loginUser(name,password));
+        //测试用例4
+        name = "zcxzcx";
+        password = "123";
+        assertEquals(-2,userService.loginUser(name,password));
+        //测试用例5
+        name = "zxc";
+        password = "12";
+        assertEquals(-2,userService.loginUser(name,password));
+        //测试用例6
+        name = "yxx";
+        password = "123213213";
+        assertEquals(-3,userService.loginUser(name,password));
+        //测试用例7
+        name = "zcxzcx";
+        password = "12378";
+        assertEquals(-2,userService.loginUser(name,password));
     }
 
     @Test
